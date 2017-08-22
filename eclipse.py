@@ -45,8 +45,7 @@ def parse_kml(kml):
     return lons, lats
 
 coords = states.geometry.map(parse_kml)
-states["lons"] = coords.map(lambda row: row[0])
-states["lats"] = coords.map(lambda row: row[1])
+states[['lons', 'lats']] = coords.apply(pd.Series)
 
 from bokeh.plotting import figure, show
 
